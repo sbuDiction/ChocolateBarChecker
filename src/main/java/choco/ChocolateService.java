@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ChocolateService {
 
-    @SqlQuery("select * from chocolate")
+    @SqlQuery("select * from chocolate order by id desc")
     @RegisterBeanMapper(ChocolateBar.class)
     List<ChocolateBar> getBars();
 
@@ -23,12 +23,19 @@ public interface ChocolateService {
     @RegisterBeanMapper(ChocolateBar.class)
     ChocolateBar getBarByName(String name);
 
-    @SqlQuery("select * from chocolate where name = ?")
+    @SqlQuery("select * from chocolate where id = ?")
     @RegisterBeanMapper(ChocolateBar.class)
     ChocolateBar getBarById(int id);
 
-    @SqlUpdate("update chocolate set qty = qty + 1 where name = ?")
-    void eatOneMoreBar(int id);
+    @SqlQuery("select * from chocolate where name = ?")
+    @RegisterBeanMapper(ChocolateBar.class)
+    ChocolateBar getBarByName(int id);
+
+    @SqlUpdate("update chocolate set qty = (qty + 1) where id = ?")
+    void incrementQty(int id);
+
+    @SqlUpdate("update chocolate set qty = qty - 1 where id = ? and (qty - 1) >= 0")
+    void decrementQty(int id);
 
     @SqlUpdate("delete from chocolate where id = ?")
     void deleteBar(int id);
