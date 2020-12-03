@@ -1,2 +1,3 @@
-# Jdbi examples
+# Jdbi, API & SparkJava examples
+
 
