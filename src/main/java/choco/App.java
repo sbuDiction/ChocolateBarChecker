@@ -37,7 +37,7 @@ public class App {
 
         }, gson::toJson);
 
-        get("/chocolates", (req, res) -> {
+        get("/", (req, res) -> {
 
             List<ChocolateBar> bars = jdbi.withHandle(h -> {
                 ChocolateService chocolateService = h.attach(ChocolateService.class);
@@ -67,7 +67,7 @@ public class App {
             int  qty = Integer.parseInt(qtyString);
 
             if  (name.equals("") || qty == 0) {
-                res.redirect("/chocolates");
+                res.redirect("/");
             }
 
 
@@ -76,7 +76,7 @@ public class App {
                 chocolateService.createBar(name, qty);
             });
 
-            res.redirect("/chocolates");
+            res.redirect("/");
             return null;
         });
 
@@ -105,7 +105,7 @@ public class App {
             });
 
 
-            res.redirect("/chocolates");
+            res.redirect("/");
             return null;
         });
 
