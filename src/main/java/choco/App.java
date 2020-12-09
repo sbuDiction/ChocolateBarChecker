@@ -19,7 +19,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        Jdbi jdbi = Jdbi.create("jdbc:postgresql://localhost:5432/choco");
+        Jdbi jdbi = Jdbi.create("jdbc:postgresql://localhost/choco?user=codex&password=codex123");
         jdbi.installPlugin(new SqlObjectPlugin());
 
         staticFiles.location("/public"); // Static files
